@@ -25,4 +25,4 @@ document.addEventListener("DOMContentLoaded", function() {
             sekcjaProjekty.style.display = "none";  
         }
     });
-});sc
+});
