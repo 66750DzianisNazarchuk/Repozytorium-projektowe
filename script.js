@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded", function() {
-  
     const btnTheme = document.getElementById("btn-theme");
     let isDefaultRed = true; 
 
     btnTheme.addEventListener("click", function() {
         if (isDefaultRed) {
             document.body.style.backgroundColor = "darkgreen";
-            document.body.style.color = "white"; 
+            document.body.style.color = "black";
             isDefaultRed = false;
         } else {
             document.body.style.backgroundColor = "darkred";
-            document.body.style.color = "white";
+            document.body.style.color = "black";
             isDefaultRed = true;
         }
     });
