@@ -83,4 +83,35 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
+
+    fetch('data.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Błąd podczas pobierania pliku JSON");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const listaUmiejetnosci = document.getElementById('lista-umiejetnosci');
+            const listaZainteresowania = document.getElementById('lista-zainteresowania');
+
+            if (listaUmiejetnosci) {
+                data.umiejetnosci.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    listaUmiejetnosci.appendChild(li);
+                });
+            }
+
+            if (listaZainteresowania) {
+                data.zainteresowania.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    listaZainteresowania.appendChild(li);
+                });
+            }
+        })
+        .catch(error => {
+            console.error("Wystąpił błąd:", error);
+        });
 });
