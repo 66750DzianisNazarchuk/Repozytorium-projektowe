@@ -79,8 +79,31 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             if (isValid) {
-                document.getElementById("success-msg").style.display = "block";
-                form.reset();
+                const formData = {
+                    imie: imie,
+                    nazwisko: nazwisko,
+                    email: email,
+                    wiadomosc: wiadomosc
+                };
+
+                fetch(https://webhook.site/fae5a525-da90-4e69-97ed-fd0152deeacc, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    if(response.ok) {
+                        document.getElementById("success-msg").style.display = "block";
+                        form.reset();
+                    } else {
+                        alert("Błąd podczas wysyłania danych.");
+                    }
+                })
+                .catch(error => {
+                    alert("Błąd połączenia z serwerem.");
+                });
             }
         });
     }
@@ -88,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('data.json')
         .then(response => {
             if (!response.ok) {
-                throw new Error("Błąd podczas pobierania pliku JSON");
+                throw new Error("Błąd");
             }
             return response.json();
         })
@@ -113,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => {
-            console.error("Wystąpił błąd z pobieraniem JSON:", error);
+            console.error(error);
         });
 
     const inputNotatka = document.getElementById("nowa-notatka");
