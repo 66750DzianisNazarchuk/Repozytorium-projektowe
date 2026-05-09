@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    
     const btnTheme = document.getElementById("btn-theme");
     let isDefaultRed = true; 
 
@@ -112,6 +113,64 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         })
         .catch(error => {
-            console.error("Wystąpił błąd:", error);
+            console.error("Wystąpił błąd z pobieraniem JSON:", error);
         });
+
+    const inputNotatka = document.getElementById("nowa-notatka");
+    const btnDodajNotatke = document.getElementById("btn-dodaj-notatke");
+    const listaNotatek = document.getElementById("lista-notatek");
+
+    if (inputNotatka && btnDodajNotatke && listaNotatek) {
+        function pobierzNotatki() {
+            const notatki = localStorage.getItem("mojeNotatki");
+            return notatki ? JSON.parse(notatki) : [];
+        }
+
+        function zapiszNotatki(notatki) {
+            localStorage.setItem("mojeNotatki", JSON.stringify(notatki));
+        }
+
+        function wyswietlNotatki() {
+            listaNotatek.innerHTML = "";
+            const notatki = pobierzNotatki();
+
+            notatki.forEach((notatka, index) => {
+                const li = document.createElement("li");
+                li.style.marginBottom = "5px";
+                li.textContent = notatka + " ";
+
+                const btnUsun = document.createElement("button");
+                btnUsun.textContent = "Usuń";
+                btnUsun.style.marginLeft = "10px";
+                btnUsun.style.cursor = "pointer";
+                btnUsun.onclick = function() {
+                    usunNotatke(index);
+                };
+
+                li.appendChild(btnUsun);
+                listaNotatek.appendChild(li);
+            });
+        }
+
+        btnDodajNotatke.addEventListener("click", function() {
+            const tekst = inputNotatka.value.trim();
+            if (tekst !== "") {
+                const notatki = pobierzNotatki();
+                notatki.push(tekst);
+                zapiszNotatki(notatki);
+                inputNotatka.value = "";
+                wyswietlNotatki();
+            }
+        });
+
+        function usunNotatke(index) {
+            const notatki = pobierzNotatki();
+            notatki.splice(index, 1);
+            zapiszNotatki(notatki);
+            wyswietlNotatki();
+        }
+
+        wyswietlNotatki();
+    }
+
 });
