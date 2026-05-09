@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     wiadomosc: wiadomosc
                 };
 
-                fetch(https://webhook.site/fae5a525-da90-4e69-97ed-fd0152deeacc, {
+                fetch("https://webhook.site/fae5a525-da90-4e69-97ed-fd0152deeacc", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
