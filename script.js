@@ -86,23 +86,17 @@ document.addEventListener("DOMContentLoaded", function() {
                     wiadomosc: wiadomosc
                 };
 
-                fetch("https://webhook.site/fae5a525-da90-4e69-97ed-fd0152deeacc", {
+               fetch("https://webhook.site/fae5a525-da90-4e69-97ed-fd0152deeacc", {
                     method: "POST",
-                    headers: {
-                        "Content-Type": "text/plain"
-                    },
+                    mode: "no-cors",
                     body: JSON.stringify(formData)
                 })
-                .then(response => {
-                    if(response.ok) {
-                        document.getElementById("success-msg").style.display = "block";
-                        form.reset();
-                    } else {
-                        alert("Błąd podczas wysyłania danych.");
-                    }
+                .then(() => {
+                    document.getElementById("success-msg").style.display = "block";
+                    form.reset();
                 })
                 .catch(error => {
-                    alert("Błąd połączenia z serwerem.");
+                    console.error("Wystąpił błąd:", error);
                 });
             }
         });
